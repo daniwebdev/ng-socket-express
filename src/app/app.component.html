@@ -1,21 +1,46 @@
 <!--The content below is only a placeholder and can be replaced.-->
+<!-- <router-outlet></router-outlet> -->
 <div style="text-align:center">
-  <h1>
-    Welcome to {{ title }}!
-  </h1>
-  <img width="300" alt="Angular Logo" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTAgMjUwIj4KICAgIDxwYXRoIGZpbGw9IiNERDAwMzEiIGQ9Ik0xMjUgMzBMMzEuOSA2My4ybDE0LjIgMTIzLjFMMTI1IDIzMGw3OC45LTQzLjcgMTQuMi0xMjMuMXoiIC8+CiAgICA8cGF0aCBmaWxsPSIjQzMwMDJGIiBkPSJNMTI1IDMwdjIyLjItLjFWMjMwbDc4LjktNDMuNyAxNC4yLTEyMy4xTDEyNSAzMHoiIC8+CiAgICA8cGF0aCAgZmlsbD0iI0ZGRkZGRiIgZD0iTTEyNSA1Mi4xTDY2LjggMTgyLjZoMjEuN2wxMS43LTI5LjJoNDkuNGwxMS43IDI5LjJIMTgzTDEyNSA1Mi4xem0xNyA4My4zaC0zNGwxNy00MC45IDE3IDQwLjl6IiAvPgogIDwvc3ZnPg==">
+  <img width="150" alt="Angular Logo" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTAgMjUwIj4KICAgIDxwYXRoIGZpbGw9IiNERDAwMzEiIGQ9Ik0xMjUgMzBMMzEuOSA2My4ybDE0LjIgMTIzLjFMMTI1IDIzMGw3OC45LTQzLjcgMTQuMi0xMjMuMXoiIC8+CiAgICA8cGF0aCBmaWxsPSIjQzMwMDJGIiBkPSJNMTI1IDMwdjIyLjItLjFWMjMwbDc4LjktNDMuNyAxNC4yLTEyMy4xTDEyNSAzMHoiIC8+CiAgICA8cGF0aCAgZmlsbD0iI0ZGRkZGRiIgZD0iTTEyNSA1Mi4xTDY2LjggMTgyLjZoMjEuN2wxMS43LTI5LjJoNDkuNGwxMS43IDI5LjJIMTgzTDEyNSA1Mi4xem0xNyA4My4zaC0zNGwxNy00MC45IDE3IDQwLjl6IiAvPgogIDwvc3ZnPg==">
 </div>
-<h2>Here are some links to help you start: </h2>
-<ul>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://angular.io/tutorial">Tour of Heroes</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://angular.io/cli">CLI Documentation</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://blog.angular.io/">Angular blog</a></h2>
-  </li>
-</ul>
+<div class="container" style="max-width: 500px">
+    <!-- <button class="btn btn-primary mb-3">Tambah</button> -->
+    <div class="card mb-3">
+      <div class="card-body">
+        <form #add="ngForm" (ngSubmit)="addChat(add)">
+          <div class="form-group mx-auto row" style="width: 80%">
+            <input class="form-control col-8 r-0" autocomplete="off" name="name" ngModel #name="ngModel">
+            <button class="btn btn-success col-4 r-0">Tambah</button>
+          </div>
+        </form>
+      </div>
+    </div>
 
-<router-outlet></router-outlet>
+    <div class="row">
+      <div class="col-md-12" *ngFor="let item of users; let i = index">
+        <div class="card">
+          <div class="card-header">
+            {{item.name}}
+            <button class="btn btn-danger btn-sm float-right" (click)="hapusChat(item)">Hapus</button>
+            <div class="clearfix"></div>
+          </div>
+
+          <div class="card-body">
+            <div class="chat-body">
+              <div *ngFor="let msg of message_list">
+                <strong [ngClass]="{'text-success': item.name == msg.name}">{{msg.name}}: </strong> <span>{{msg.message}}</span>
+              </div>
+            </div>
+          </div>
+          <div class="card-footer pb-0">
+            <form #chat="ngForm" (ngSubmit) = "onSubmit(chat, {name: item.name, key: item.key})">
+              <div class="form-group row">
+                <input name="msg" class="form-control col-8 r-0" ngModel #msg="ngModel" autocomplete="off">
+                <button type="submit" class="btn btn-primary col-4 r-0">Send</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+</div>
