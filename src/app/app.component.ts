@@ -8,6 +8,7 @@ import { Observable } from 'rxjs';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
+
 export class AppComponent implements OnInit {
   title = 'chat';
   
@@ -16,11 +17,7 @@ export class AppComponent implements OnInit {
 
   constructor(
     private socket: Socket
-  ) {
-
-    // let random = this.random(32);
-
-  }
+  ) {  }
 
   ngOnInit(): void {
     this.socket.connect();
@@ -29,6 +26,7 @@ export class AppComponent implements OnInit {
     sock.on('recived', data => {
       this.message_list.push(data)
     })
+
   }
 
   random(lengthOfCode: number) {

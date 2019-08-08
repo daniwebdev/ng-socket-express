@@ -7,7 +7,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule } from "@angular/forms";
 
 import { SocketIoModule, SocketIoConfig } from "ngx-socket-io";
-const config: SocketIoConfig = { url: 'http://localhost:8081', options: {} };
+const config: SocketIoConfig = { url: 'http://192.168.206.120:8081', options: {} };
 
 @NgModule({
   declarations: [
